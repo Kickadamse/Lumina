@@ -1,6 +1,11 @@
 // ── CONFIG ──
 const ADMIN_EMAIL = 'kickadam00@gmail.com';
 
+// ── EMAILJS CONFIG — fill these in ──
+const EJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // EmailJS → Account → Public Key
+const EJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // EmailJS → Email Services → Service ID
+const EJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // EmailJS → Email Templates → Template ID
+
 // ── COUNTRIES ──
 const COUNTRIES = [
   { code: 'SE', name: 'Sweden', flag: '🇸🇪' },
@@ -115,12 +120,25 @@ function register(e) {
   const user = { name, email, password: pass };
   users.push(user);
   saveUsers();
+  sendWelcomeMail(name, email, pass);
   startSession(user);
 }
 
 function showErr(el, msg) {
   el.textContent = msg;
   el.classList.remove('hidden');
+}
+
+// ── WELCOME EMAIL ──
+function sendWelcomeMail(name, email, password) {
+  if (EJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY') return; // not configured yet
+  emailjs.init(EJS_PUBLIC_KEY);
+  emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_ID, {
+    to_email: email,
+    to_name:  name,
+    username: email,
+    password: password,
+  }).catch(err => console.warn('EmailJS error:', err));
 }
 
 function startSession(user) {
