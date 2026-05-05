@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lumina</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- AUTH -->
+<div id="auth-screen">
+  <div class="auth-bg"></div>
+  <div class="auth-card">
+    <div class="auth-logo">◈ <span>LUMINA</span></div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchTab('login')">Log In</button>
+      <button class="auth-tab" onclick="switchTab('register')">Register</button>
+    </div>
+    <form id="login-form" onsubmit="login(event)">
+      <div class="field"><label>Email</label><input type="email" id="l-email" placeholder="you@example.com" required/></div>
+      <div class="field"><label>Password</label><input type="password" id="l-pass" placeholder="Password" required/></div>
+      <div class="auth-err hidden" id="login-err"></div>
+      <button type="submit" class="btn-auth">Log In</button>
+    </form>
+    <form id="register-form" class="hidden" onsubmit="register(event)">
+      <div class="field"><label>Name</label><input type="text" id="r-name" placeholder="Your name" required/></div>
+      <div class="field"><label>Email</label><input type="email" id="r-email" placeholder="you@example.com" required/></div>
+      <div class="field"><label>Password</label><input type="password" id="r-pass" placeholder="Choose a password" required/></div>
+      <div class="auth-err hidden" id="register-err"></div>
+      <button type="submit" class="btn-auth">Create Account</button>
+    </form>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app" class="hidden">
+  <header>
+    <div class="h-logo">◈ <span>LUMINA</span></div>
+    <nav class="h-nav">
+      <button class="nav-btn active" onclick="navigate('news')">News</button>
+      <button class="nav-btn" onclick="navigate('servers')">FiveM Servers</button>
+    </nav>
+    <div class="h-right">
+      <span id="h-username"></span>
+      <button class="btn-logout" onclick="logout()">Log Out</button>
+    </div>
+  </header>
+
+  <main id="main"></main>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
